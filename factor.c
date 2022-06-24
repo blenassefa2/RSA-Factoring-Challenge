@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 		while (num % i != 0)
 			i += 1;
 
-		printf("%li=%li*%li\n", num, i, num / i);
+		printf("%s=%li*%li\n", line, i, num / i);
 	}
 
 	fclose(fp);
