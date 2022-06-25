@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 import sys
+from decimal import *
+
 
 arg1 = str(sys.argv[1])
 
@@ -8,9 +10,14 @@ File = open(arg1, 'r')
 lines = File.readlines()
 
 for line in lines:
+    n = len(line)
+    getcontext().prec = n
+    
     num = int(line)
-    i = 2
+    a = int(Decimal(num).sqrt())
 
-    while num % i != 0:
-        i += 1
+    
+    for i in range(a, a-n, -2):
+        if num % i == 0:
+            break
     print("{:d}={:d}*{:d}".format(num, num//i, i))
