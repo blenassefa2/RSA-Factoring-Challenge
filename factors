@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import sys
-from decimal import *
+from math import sqrt
 
 
 arg1 = str(sys.argv[1])
@@ -10,14 +10,15 @@ File = open(arg1, 'r')
 lines = File.readlines()
 
 for line in lines:
-    n = len(line)
-    getcontext().prec = n
     
     num = int(line)
-    a = int(Decimal(num).sqrt())
+    a = sqrt(num)
+    if a % 2 == 0:
+        print("{:d}={:d}*{:d}".format(num, num//i, i))
+        continue
 
-    
-    for i in range(a, a-n, -2):
+    i = 3
+    for i in range(i, a, 2):
         if num % i == 0:
             break
     print("{:d}={:d}*{:d}".format(num, num//i, i))
