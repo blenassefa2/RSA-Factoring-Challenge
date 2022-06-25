@@ -15,7 +15,14 @@ for line in lines:
     M = 1
     sqrtN = ceil(sqrt(N))
 
-    while sqrtN < N: 
+    a = sqrtN * sqrtN
+    if N % 2 == 0:
+        print("{:d}={:d}*2".format(N, N//2))
+        continue
+    if N % 3 == 0:
+        print("{:d}={:d}*3".format(N, N//3))
+        continue
+    while sqrtN < N*N: 
         a = sqrtN * sqrtN
         a -= 1
         cd = gcd(a, N)
@@ -25,4 +32,4 @@ for line in lines:
         sqrtN += 1
 
 
-    print("{:d}={:d}*{:d}".format(N, N//M, M))
+    print("{:d}={:d}*{:d}".format(N, M, N//M))
