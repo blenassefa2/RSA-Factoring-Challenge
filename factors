@@ -12,13 +12,17 @@ lines = File.readlines()
 for line in lines:
     
     num = int(line)
-    a = sqrt(num)
-    if a % 2 == 0:
-        print("{:d}={:d}*{:d}".format(num, num//i, i))
+    a = int(sqrt(num))
+    if num % 2 == 0:
+        print("{:d}=2*{:d}".format(num, num//2))
         continue
 
-    i = 3
-    for i in range(i, a, 2):
+    if a % 2 == 0:
+        a += 1
+    
+    for i in range(3, a + 1, 2):
         if num % i == 0:
+            print("{:d}={:d}*{:d}".format(num, num//i, i))
             break
-    print("{:d}={:d}*{:d}".format(num, num//i, i))
+    if num % i != 0:
+        print("{:d}=1*{:d}".format(num, num))
