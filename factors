@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import sys
-from math import sqrt
+from math import sqrt, gcd, ceil
 
 
 arg1 = str(sys.argv[1])
@@ -11,18 +11,18 @@ lines = File.readlines()
 
 for line in lines:
     
-    num = int(line)
-    a = int(sqrt(num))
-    if num % 2 == 0:
-        print("{:d}=2*{:d}".format(num, num//2))
-        continue
+    N = int(line)
+    M = 1
+    sqrtN = ceil(sqrt(N))
 
-    if a % 2 == 0:
-        a += 1
-    
-    for i in range(3, a + 1, 2):
-        if num % i == 0:
-            print("{:d}={:d}*{:d}".format(num, num//i, i))
+    while sqrtN < N: 
+        a = sqrtN * sqrtN
+        a -= 1
+        cd = gcd(a, N)
+        if cd > 1:
+            M = cd
             break
-    if num % i != 0:
-        print("{:d}=1*{:d}".format(num, num))
+        sqrtN += 1
+
+
+    print("{:d}={:d}*{:d}".format(N, N//M, M))

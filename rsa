@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import sys
-from decimal import *
+from math import sqrt, gcd, ceil
 
 
 arg1 = str(sys.argv[1])
@@ -10,14 +10,19 @@ File = open(arg1, 'r')
 lines = File.readlines()
 
 for line in lines:
-    n = len(line)
-    getcontext().prec = n
     
-    num = int(line)
-    a = int(Decimal(num).sqrt())
+    N = int(line)
+    M = 1
+    sqrtN = ceil(sqrt(N))
 
-    
-    for i in range(a, a-n, -2):
-        if num % i == 0:
+    while sqrtN < N: 
+        a = sqrtN * sqrtN
+        a -= 1
+        cd = gcd(a, N)
+        if cd > 1:
+            M = cd
             break
-    print("{:d}={:d}*{:d}".format(num, num//i, i))
+        sqrtN += 1
+
+
+    print("{:d}={:d}*{:d}".format(N, N//M, M))
