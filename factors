@@ -1,7 +1,33 @@
 #!/usr/bin/python3
 import sys
 from math import sqrt, gcd, ceil
+import threading
+import time
 
+class Factors:
+    def func(self, N):
+        M = 1
+        sqrtN = ceil(sqrt(N))
+
+        a = sqrtN * sqrtN
+        if N % 2 == 0:
+            print("{:d}={:d}*2".format(N, N//2))
+            return
+        if N % 3 == 0:
+            print("{:d}={:d}*3".format(N, N//3))
+            return
+        while sqrtN < N*N: 
+            a = sqrtN * sqrtN
+            a -= 1
+            cd = gcd(a, N)
+            if cd > 1:
+                M = cd
+                break
+            sqrtN += 1
+        print("{:d}={:d}*{:d}".format(N, M, N//M))
+    def __init__(self, value):
+        t = threading.Thread(target=self.func(value))
+        t.start()
 
 arg1 = str(sys.argv[1])
 
@@ -9,27 +35,7 @@ File = open(arg1, 'r')
 
 lines = File.readlines()
 
-for line in lines:
-    
+for line in lines:    
     N = int(line)
-    M = 1
-    sqrtN = ceil(sqrt(N))
+    Factors(N)
 
-    a = sqrtN * sqrtN
-    if N % 2 == 0:
-        print("{:d}={:d}*2".format(N, N//2))
-        continue
-    if N % 3 == 0:
-        print("{:d}={:d}*3".format(N, N//3))
-        continue
-    while sqrtN < N*N: 
-        a = sqrtN * sqrtN
-        a -= 1
-        cd = gcd(a, N)
-        if cd > 1:
-            M = cd
-            break
-        sqrtN += 1
-
-
-    print("{:d}={:d}*{:d}".format(N, M, N//M))
